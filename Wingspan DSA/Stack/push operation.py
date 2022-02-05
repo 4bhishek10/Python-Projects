@@ -41,6 +41,6 @@ class Stack:
         return msg
 
 stack1=Stack(5)
-#Push all the required element(s).
+#Push all the required element.
 stack1.push("Shirt1")
 
