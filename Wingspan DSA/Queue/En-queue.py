@@ -11,7 +11,7 @@ class Queue:
         return self.__max_size
     
     def is_full(self):
-        if self.__rear == self.__max_size:
+        if self.__rear == self.__max_size - 1:
           return True
         else:
           return False
