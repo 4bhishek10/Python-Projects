@@ -32,6 +32,9 @@ class Queue:
           data = self.__elements[self.__front]
           #self.__elements[self.__front] = None
           self.__front += 1
+          if self.__front == self.__max_size:
+              self.__front = 0
+              self.__rear = -1
           return data
 
         
