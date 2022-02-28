@@ -1,138 +1,39 @@
-#lex_auth_0127439130519060481634
 
-class Queue:
-    def __init__(self,max_size):
-
-        self.__max_size=max_size
-        self.__elements=[None]*self.__max_size
-        self.__rear=-1
-        self.__front=0
-
-    def is_full(self):
-        if(self.__rear==self.__max_size-1):
-                return True
-        return False
-
-    def is_empty(self):
-        if(self.__front>self.__rear):
-            return True
-        return False
-
-    def enqueue(self,data):
-        if(self.is_full()):
-            print("Queue is full!!!")
-        else:
-            self.__rear+=1
-            self.__elements[self.__rear]=data
-
-    def dequeue(self):
-        if(self.is_empty()):
-            print("Queue is empty!!!")
-        else:
-            data=self.__elements[self.__front]
-            self.__front+=1
-            return data
-
-    def display(self):
-        for index in range(self.__front, self.__rear+1):
-            print(self.__elements[index])
+def alternateMerge(arr1, arr2, n1, n2, arr3) :
+	i = 0; j = 0; k = 0
 
 
-    def get_max_size(self):
-        return self.__max_size
+	while (i < n1 and j < n2) :
+		arr3[k] = arr1[i]
+		i += 1
+		k += 1
+		
+		arr3[k] = arr2[j]
+		j += 1
+		k += 1
+	
 
-    #You can use the below __str__() to print the elements of the DS object while debugging
-    def __str__(self):
-        msg=[]
-        index=self.__front
-        while(index<=self.__rear):
-            msg.append((str)(self.__elements[index]))
-            index+=1
-        msg=" ".join(msg)
-        msg="Queue data(Front to Rear): "+msg
-        return msg
 
-#Implement Job, Employee and Company classes here
-class Job:
-  def __init__(self, name, time_needed, time_elapsed = 0):
-    self.__name = name
-    self.__time_needed = time_needed
-    self.__time_elapsed = time_elapsed
+	while (i < n1) :
+		arr3[k] = arr1[i]
+		i += 1
+		k += 1
 
-  def get_name(self):
-    return self.__name
+	while (j < n2) :
+		arr3[k] = arr2[j]
+		k += 1
+		j += 1
+		
 
-  def get_time_needed(self):
-    return self.__time_needed
+arr1 = [1, 3, 5, 7, 9, 11]
+n1 = len(arr1)
 
-  def get_time_elapsed(self):
-    return self.__time_elapsed
+arr2 = [2, 4, 6, 8]
+n2 = len(arr2)
 
-class Employee:
-  def __init__(self, name):
-    self.__name = name
-    self.__allocated_job
+arr3= [0] *(n1 + n2)
+alternateMerge(arr1, arr2, n1, n2, arr3)
 
-  def set_allocated_job(self, allocated_job):
-    self.__allocated_job = allocated_job
-
-  def get_name(self):
-    return self.__name
-
-  def get_allocated_job(self):
-    return self.__allocated_job
-
-  def elpased_time(self, no_of_mins):
-    pass
-  
-    
-    
-
-#Change the values and test your programH
-emp1=Employee("Ken")
-emp2=Employee("Henry")
-emp3=Employee("Jack")
-emp4=Employee("Hen")
-emp5=Employee("Jill")
-emp_list=[emp1,emp2,emp3,emp4,emp5]
-company=Company(emp_list)
-job1=Job("job1",50)
-job2=Job("job2",45)
-job3=Job("job3",35)
-job4=Job("job4",400)
-job5=Job("job5",30)
-job6=Job("job6",30)
-job7=Job("job7",50)
-job8=Job("job8",25)
-company.allocate_new_job(job1)
-company.allocate_new_job(job2)
-company.allocate_new_job(job3)
-company.allocate_new_job(job4)
-company.allocate_new_job(job5)
-company.allocate_new_job(job6)
-company.allocate_new_job(job7)
-company.allocate_new_job(job8)
-print("Initial allocation:")
-for emp in company.get_employees():
-    print(emp.get_name(),"is allocated",emp.get_allocated_job().get_name())
-print()
-print("Pending Jobs:")
-company.get_pending_jobs().display()
-completed_jobs=company.elapsed_time(30)
-'''print("Completed Jobs :")
-for job in completed_jobs:
-    print(job.name)'''
-
-print("After completion:")
-for emp in company.get_employees():
-    print(emp.get_name(),"needs", emp.get_allocated_job().get_time_needed()-emp.get_allocated_job().get_time_elapsed(),"more minutes for",emp.get_allocated_job().get_name())
-    print()
-print("Pending Jobs:")
-company.get_pending_jobs().display()
-completed_jobs=company.elapsed_time(10)
-print("After completion:")
-for emp in company.get_employees():
-    print(emp.get_name(),"needs", emp.get_allocated_job().get_time_needed()-emp.get_allocated_job().get_time_elapsed(),"more minutes for",emp.get_allocated_job().get_name())
-    print()
-print("Pending Jobs:")
-company.get_pending_jobs().display()
+print("Array after merging")
+for i in range(0, (n1 + n2)) :
+	print(arr3[i] , end = " ")
