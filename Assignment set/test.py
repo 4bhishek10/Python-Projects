@@ -1,39 +1,35 @@
-
-def alternateMerge(arr1, arr2, n1, n2, arr3) :
-	i = 0; j = 0; k = 0
-
-
-	while (i < n1 and j < n2) :
-		arr3[k] = arr1[i]
-		i += 1
-		k += 1
-		
-		arr3[k] = arr2[j]
-		j += 1
-		k += 1
-	
+import math
+import os
+import random
+import re
+import sys
 
 
-	while (i < n1) :
-		arr3[k] = arr1[i]
-		i += 1
-		k += 1
+class Car:
 
-	while (j < n2) :
-		arr3[k] = arr2[j]
-		k += 1
-		j += 1
-		
+    def __new__(cls, max_speed,unit):
+        return "Car with the maximum speed of {0} {1}".format(max_speed, unit)
 
-arr1 = [1, 3, 5, 7, 9, 11]
-n1 = len(arr1)
+class Boat:
 
-arr2 = [2, 4, 6, 8]
-n2 = len(arr2)
+    def __new__(cls,max_speed):
+        return "Boat with the maximum speed of {0} knots".format(max_speed)
 
-arr3= [0] *(n1 + n2)
-alternateMerge(arr1, arr2, n1, n2, arr3)
 
-print("Array after merging")
-for i in range(0, (n1 + n2)) :
-	print(arr3[i] , end = " ")
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    q = int(input())
+    queries = []
+    for _ in range(q):
+        args = input().split()
+        vehicle_type, params = args[0], args[1:]
+        if vehicle_type == "car":
+            max_speed, speed_unit = int(params[0]), params[1]
+            vehicle = Car(max_speed, speed_unit)
+        elif vehicle_type == "boat":
+            max_speed = int(params[0])
+            vehicle = Boat(max_speed)
+        else:
+            raise ValueError("invalid vehicle type")
+        fptr.write("%s\n" % vehicle)
+    fptr.close()
