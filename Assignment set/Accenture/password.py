@@ -23,8 +23,11 @@ def space(st):
   return False
   
 def checkPassword(st):
-  pass
+  if length(st) == True and space(st) == False and containsNumber(st) == True and upperCase(st) == True:
+      return 1
+  else:
+      return 0
 
-st = str(input())
+st = str(input("please enter the password: "))
 
-print(containsNumber(st))
+print(checkPassword(st))
