@@ -1,0 +1,42 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import datasets, linear_model
+from sklearn.metrics import mean_squared_error
+
+diabetes = datasets.load_diabetes()
+
+#dict_keys(['data', 'target', 'frame', 'DESCR', 'feature_names', 'data_filename', 'target_filename', 'data_module'])
+#print(diabetes.DESCR)
+diabetes_x = diabetes.data[:, np.newaxis,2]
+
+#getting first 20 lines of data for x co-ordinate to train data
+diabetes_x_train = diabetes_x[:-30]
+#getting last 20 lines of data for x co-ordinate to test data
+diabetes_x_test = diabetes_x[-30:]
+
+#these are labels/ y co-ordinates
+#getting first 20 lines of target for y co-ordinate to train data
+diabetes_y_train = diabetes.target[:-30]
+#getting lasst 20 lines of target for y co-ordinate to test data
+diabetes_y_test = diabetes.target[-30:]
+
+model = linear_model.LinearRegression()
+
+#training model using x & y axis coordinate and fitting a line
+model.fit(diabetes_x_train, diabetes_y_train)
+
+diabetes_y_predict = model.predict(diabetes_x_test)
+
+print("Mean squared error is: ", mean_squared_error(diabetes_y_test, diabetes_y_predict))
+
+print("Weights: ", model.coef_)
+print("Intercept: ", model.intercept_)
+
+#plotting a graph
+plt.scatter(diabetes_x_test, diabetes_y_test)
+#drawing line
+plt.plot(diabetes_x_test, diabetes_y_predict)
+#        test data        predicted data
+
+plt.show()
+
